@@ -1,0 +1,798 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>新春福袋抓抓乐 · 像素素材沙盒</title>
+    <style>
+      @font-face {
+        font-family: "Fusion Pixel";
+        /* 页面放在项目根 或 src/ 下都能加载（第二个 URL 作为兜底） */
+        src: url("./src/assets/fonts/fusion-pixel-12px-zh_hans.woff2") format("woff2"),
+          url("./assets/fonts/fusion-pixel-12px-zh_hans.woff2") format("woff2");
+        font-display: swap;
+      }
+      :root {
+        --void: #07040a;
+        --ink: #140d18;
+        --ink2: #1d1322;
+        --night: #221736;
+        --plum: #3a2650;
+        --gold: #ffd05a;
+        --gold-l: #ffefa8;
+        --red: #d72b3f;
+        --cream: #fff3d6;
+        --grey: #7a6b7f;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 24px 28px 72px;
+        background: var(--void);
+        color: var(--cream);
+        font-family: "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", sans-serif;
+        font-size: 14px;
+        background-image: radial-gradient(circle at 50% 0%, #1d1322 0%, #07040a 60%);
+      }
+      header {
+        max-width: 1360px;
+        margin: 0 auto 22px;
+      }
+      h1 {
+        margin: 0 0 6px;
+        font-size: 22px;
+        letter-spacing: 2px;
+        color: var(--gold);
+        text-shadow: 0 2px 0 #560b17;
+      }
+      header p {
+        margin: 4px 0;
+        color: #bcabbe;
+        line-height: 1.6;
+      }
+      code {
+        color: var(--gold-l);
+      }
+      .sections {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        max-width: 1360px;
+        margin: 0 auto;
+      }
+      section {
+        border-top: 1px solid #3a2650;
+        padding-top: 18px;
+      }
+      section > h2 {
+        margin: 0 0 4px;
+        font-size: 16px;
+        color: var(--gold);
+        letter-spacing: 1px;
+      }
+      section > p.hint {
+        margin: 0 0 14px;
+        color: #9c8ba5;
+        font-size: 12px;
+      }
+      .grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 18px;
+      }
+      figure {
+        margin: 0;
+        background: #100b16;
+        border: 1px solid #463850;
+        padding: 8px;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.55);
+      }
+      figure canvas {
+        display: block;
+        width: 640px;
+        height: 360px;
+        image-rendering: pixelated;
+        image-rendering: crisp-edges;
+        background: #000;
+      }
+      figcaption {
+        margin-top: 8px;
+        font-size: 12px;
+        color: #bcabbe;
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 10px;
+      }
+      figcaption b {
+        color: var(--gold);
+        font-weight: 600;
+      }
+      figcaption span {
+        color: #7a6b7f;
+        font-family: Consolas, monospace;
+        font-size: 11px;
+      }
+      .badge {
+        display: inline-block;
+        padding: 1px 7px;
+        border: 1px solid #8a5a1e;
+        color: var(--gold);
+        font-size: 11px;
+        border-radius: 2px;
+        margin-left: 8px;
+        vertical-align: middle;
+      }
+      .controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 0 0 12px;
+      }
+      .controls button {
+        font-family: inherit;
+        font-size: 13px;
+        padding: 7px 16px;
+        color: var(--cream);
+        background: #560b17;
+        border: 2px solid #ffd05a;
+        box-shadow: 0 3px 0 #140d18;
+        cursor: pointer;
+      }
+      .controls button:hover {
+        background: #8e1424;
+        color: #fff3d6;
+        border-color: #ffefa8;
+      }
+      .controls button:active {
+        transform: translateY(2px);
+        box-shadow: none;
+      }
+      .controls button.ghost {
+        background: #1d1322;
+        border-color: #8a5a1e;
+      }
+      footer {
+        max-width: 1360px;
+        margin: 34px auto 0;
+        color: #7a6b7f;
+        font-size: 12px;
+        line-height: 1.7;
+        border-top: 1px solid #3a2650;
+        padding-top: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>新春福袋抓抓乐 · 像素素材沙盒 <span class="badge">640×360 · 1:1</span></h1>
+      <p>
+        所有画布都是内部 640×360 的 1:1 显示（不缩放），用于逐像素检查美术资源。全部由
+        <code>src/js/render/</code> 下的 ESM 模块绘制，无外部图片 / 字体 / 网络资源。
+      </p>
+      <p>
+        请通过 Electron 窗口或本地静态服务器打开本页（<code>file://</code> 下浏览器会拦截 ESM）。
+        滚动到哪个区块，哪个区块的动画才刷新；只显示可视区域以保证流畅。
+      </p>
+    </header>
+
+    <div class="sections">
+      <section>
+        <h2>1. 背景场景 · Background</h2>
+        <p class="hint">夜空 / 星星 / 月亮 / 庙檐剪影 / 灯笼串 / 飘雪 / 前景观众。静态层已缓存到离屏画布。</p>
+        <div class="grid">
+          <figure>
+            <canvas id="bg-home" class="demo"></canvas>
+            <figcaption><b>home · 首页</b><span>Art.background(ctx,'home',t)</span></figcaption>
+          </figure>
+          <figure>
+            <canvas id="bg-stage" class="demo"></canvas>
+            <figcaption><b>stage · 舞台</b><span>Art.background(ctx,'stage',t)</span></figcaption>
+          </figure>
+          <figure>
+            <canvas id="bg-finale" class="demo"></canvas>
+            <figcaption><b>finale · 终场</b><span>Art.background(ctx,'finale',t)</span></figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section>
+        <h2>2. 抓娃娃机 · 阶段（6 个）</h2>
+        <p class="hint">
+          状态协议：phase / clawX / clawY / clawOpen / grab / pouches / goldId / misses / assist / spotlight / revealNumber。
+          另含 miss、retry 两态（文字提示 + 未中红点），主流程可直接传 phase 使用。
+        </p>
+        <div class="grid">
+          <figure>
+            <canvas id="m-idle" class="demo"></canvas>
+            <figcaption><b>idle · 待机</b><span>phase:'idle'</span></figcaption>
+          </figure>
+          <figure>
+            <canvas id="m-aim" class="demo"></canvas>
+            <figcaption><b>aim · 瞄准</b><span>phase:'aim'</span></figcaption>
+          </figure>
+          <figure>
+            <canvas id="m-drop" class="demo"></canvas>
+            <figcaption><b>drop · 下爪</b><span>phase:'drop'</span></figcaption>
+          </figure>
+          <figure>
+            <canvas id="m-grab" class="demo"></canvas>
+            <figcaption><b>grab · 抓取</b><span>phase:'grab'</span></figcaption>
+          </figure>
+          <figure>
+            <canvas id="m-lift" class="demo"></canvas>
+            <figcaption><b>lift · 上升</b><span>phase:'lift'</span></figcaption>
+          </figure>
+          <figure>
+            <canvas id="m-open" class="demo"></canvas>
+            <figcaption><b>open · 开袋揭晓</b><span>phase:'open' + revealNumber</span></figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section>
+        <h2>3. 福袋 / 金福袋 / 爪子特写</h2>
+        <p class="hint">
+          福袋：红袋身 + 金边 + 抽绳 + 福字 + 高光；金福袋更大、发光、上下漂浮、环绕星光。
+          爪子：金属爪 + 钢丝绳 + 滑块，clawOpen 控制开合，grab 时夹住福袋。
+        </p>
+        <div class="grid">
+          <figure>
+            <canvas id="g-pouch" class="demo"></canvas>
+            <figcaption><b>福袋状态</b><span>Art.pouch 沙盒辅助 API</span></figcaption>
+          </figure>
+          <figure>
+            <canvas id="g-claw" class="demo"></canvas>
+            <figcaption><b>爪子开合</b><span>Art.claw 沙盒辅助 API</span></figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section>
+        <h2>4. 标题 / 揭晓卡片 / 玩家令牌</h2>
+        <p class="hint">
+          Art.title(ctx,t) + Art.winnerCard({number,prize,levelName,t,accuracy}) + Art.playerToken({number,x,y,scale,won,dim,t})。
+          令牌 (x,y) 为令牌中心；难度星标默认 (x,y) 为左上角。
+        </p>
+        <div class="grid">
+          <figure>
+            <canvas id="g-card" class="demo"></canvas>
+            <figcaption><b>标题 + 奖卡 + 令牌 + 难度星</b><span>Art.title / winnerCard / playerToken / levelBadge</span></figcaption>
+          </figure>
+          <figure>
+            <canvas id="g-finale" class="demo"></canvas>
+            <figcaption><b>终场画面（Art.finale + 屏幕侧名单面板）</b><span>Art.background('finale') + Art.finale</span></figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section>
+        <h2>5. 面板 / 按钮 / 图标</h2>
+        <p class="hint">
+          Art.panel 四种 variant：dark / red / gold / plain；Art.button 支持 hover、disabled、primary、pressed；
+          Art.icon 8 个图标（中心锚点），(scale=2) 时 32×32。
+        </p>
+        <div class="grid">
+          <figure>
+            <canvas id="g-ui" class="demo"></canvas>
+            <figcaption><b>UI 组件总览</b><span>panel / button / icon / levelBadge / playerToken</span></figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section>
+        <h2>6. 粒子与屏幕效果</h2>
+        <p class="hint">
+          FX.update / drawBack / drawFront / getShake；按钮可实时触发烟花、金币雨、彩纸、火花、开奖光环、闪白、震屏。
+          粒子上限 400。
+        </p>
+        <div class="controls" id="fx-buttons">
+          <button data-fx="firework">烟花</button>
+          <button data-fx="coin">金币雨</button>
+          <button data-fx="confetti">彩纸</button>
+          <button data-fx="sparks">火花</button>
+          <button data-fx="ring">开奖光环</button>
+          <button data-fx="flash">闪白</button>
+          <button data-fx="shake">震屏</button>
+          <button data-fx="clear" class="ghost">清空</button>
+        </div>
+        <div class="grid">
+          <figure>
+            <canvas id="g-fx" class="demo"></canvas>
+            <figcaption><b>粒子舞台</b><span>FX + Art.background('stage') + Art.machine</span></figcaption>
+          </figure>
+        </div>
+      </section>
+    </div>
+
+    <footer>
+      沙盒仅为美术自检页，不属于正式游戏入口。正式入口是 <code>index.html</code>（Lead 维护）。
+      像素素材全部使用整数矩形 / 布里森汉姆线段 / 逐行圆绘制，<code>imageSmoothingEnabled = false</code>，无抗锯齿、无外部资源。
+    </footer>
+
+    <script type="module">
+      // 兼容两种放置位置：项目根目录（默认）或复制到 src/ 下（app:// / serve.mjs 默认根目录）
+      let renderMod;
+      try {
+        renderMod = await import('./src/js/render/index.js');
+      } catch (errRoot) {
+        renderMod = await import('./js/render/index.js');
+      }
+      const { Art, FX, Txt, PLT, VIEW } = renderMod;
+
+      // 等像素字体就绪（与游戏内字形一致），失败则回退系统字体
+      if (Txt && typeof Txt.load === 'function') {
+        try {
+          await Txt.load();
+        } catch {
+          /* ignore */
+        }
+      }
+
+      const W = VIEW.W;
+      const H = VIEW.H;
+      const canvases = Array.from(document.querySelectorAll('canvas.demo'));
+      const ctxOf = new Map();
+      for (const c of canvases) {
+        c.width = W;
+        c.height = H;
+        const ctx = c.getContext('2d');
+        ctx.imageSmoothingEnabled = false;
+        ctxOf.set(c.id, ctx);
+      }
+
+      /* ---------------- 共享机器状态 ---------------- */
+
+      const BASE_POUCHES = [
+        { id: 'p1', x: 132, gold: false },
+        { id: 'p2', x: 196, gold: false },
+        { id: 'p3', x: 258, gold: false },
+        { id: 'pg', x: 320, gold: true },
+        { id: 'p5', x: 384, gold: false },
+        { id: 'p6', x: 446, gold: false },
+        { id: 'p7', x: 506, gold: false },
+      ];
+
+      function makePouches(overrides) {
+        return BASE_POUCHES.map((p) => Object.assign({}, p, overrides || {}));
+      }
+
+      function idleState() {
+        return {
+          phase: 'idle',
+          clawX: 320,
+          clawY: 152,
+          clawOpen: 0.85,
+          pouches: makePouches(),
+          misses: 0,
+          spotlight: 0,
+        };
+      }
+
+      const PHASE_STATES = {
+        'm-idle': () => idleState(),
+        'm-aim': () => ({
+          phase: 'aim',
+          clawX: 258,
+          clawY: 148,
+          clawOpen: 0.95,
+          pouches: makePouches(),
+          spotlight: 0.1,
+        }),
+        'm-drop': () => ({
+          phase: 'drop',
+          clawX: 300,
+          clawY: 244,
+          clawOpen: 1,
+          pouches: makePouches(),
+        }),
+        'm-grab': () => ({
+          phase: 'grab',
+          clawX: 300,
+          clawY: 246,
+          clawOpen: 0.12,
+          grab: { kind: 'normal', id: 'p3' },
+          pouches: BASE_POUCHES.filter((p) => p.id !== 'p3'),
+          spotlight: 0.15,
+        }),
+        'm-lift': () => ({
+          phase: 'lift',
+          clawX: 300,
+          clawY: 162,
+          clawOpen: 0.18,
+          grab: { kind: 'normal', id: 'p3' },
+          pouches: BASE_POUCHES.filter((p) => p.id !== 'p3'),
+        }),
+        'm-open': () => ({
+          phase: 'open',
+          clawX: 320,
+          clawY: 152,
+          clawOpen: 0.4,
+          pouches: makePouches({ open: 0 }),
+          goldId: 'pg',
+          spotlight: 1,
+          revealNumber: '028',
+          misses: 2,
+          assist: true,
+        }),
+      };
+
+      function machineStateFor(id, t) {
+        const base = PHASE_STATES[id] ? PHASE_STATES[id]() : idleState();
+        const s = Object.assign({}, base, { t });
+        const wob = Math.sin(t * 1.4) * 0.05;
+        s.clawOpen = Math.max(0, Math.min(1, (base.clawOpen ?? 0.5) + wob));
+        if (id === 'm-grab' || id === 'm-lift') {
+          s.clawY = (base.clawY ?? 200) + Math.sin(t * 3) * 1.5;
+          s.shake = id === 'm-grab' ? 1 + Math.sin(t * 5) : 0;
+        }
+        return s;
+      }
+
+      /* ---------------- 各画布绘制函数 ---------------- */
+
+      const draws = new Map();
+
+      const bgs = { 'bg-home': 'home', 'bg-stage': 'stage', 'bg-finale': 'finale' };
+      for (const [id, scene] of Object.entries(bgs)) {
+        draws.set(id, (ctx, t) => Art.background(ctx, scene, t));
+      }
+
+      for (const id of Object.keys(PHASE_STATES)) {
+        draws.set(id, (ctx, t) => {
+          Art.background(ctx, 'stage', t, { dim: 0.15 });
+          Art.machine(ctx, machineStateFor(id, t), t);
+        });
+      }
+
+      // 福袋特写
+      draws.set('g-pouch', (ctx, t) => {
+        Art.background(ctx, 'stage', t, { dim: 0.35, snow: false });
+        Txt.draw(ctx, '福袋 / 金福袋状态', W / 2, 20, {
+          size: 16,
+          color: PLT.gold,
+          align: 'center',
+          valign: 'middle',
+          outline: 2,
+          outlineColor: PLT.redDeep,
+        });
+        const items = [
+          { x: 84, y: 300, gold: false, label: '普通福袋' },
+          { x: 196, y: 300, gold: true, label: '金福袋 · 漂浮' },
+          { x: 308, y: 300, gold: false, open: 0.8, label: '开袋中 open:0.8' },
+          { x: 420, y: 300, gold: true, open: 1, label: '金福袋 open:1' },
+          { x: 530, y: 300, gold: true, lift: 0.8, label: '升起 lift:0.8' },
+        ];
+        for (const it of items) {
+          Art.pouch(ctx, Object.assign({ scale: 1.8, t }, it));
+          Txt.draw(ctx, it.label, it.x, 328, {
+            size: 9,
+            color: PLT.cream,
+            align: 'center',
+            valign: 'middle',
+            outline: 1,
+            outlineColor: PLT.ink,
+          });
+        }
+        // 说明文字
+        Txt.draw(ctx, '红袋身 · 金抽绳 · 福字印 · 高光；金福袋带光晕与环绕星光', W / 2, 348, {
+          size: 10,
+          color: PLT.greyLight,
+          align: 'center',
+          valign: 'middle',
+        });
+      });
+
+      // 爪子特写
+      draws.set('g-claw', (ctx, t) => {
+        Art.background(ctx, 'stage', t, { dim: 0.35, snow: false });
+        Txt.draw(ctx, '爪子开合 / 抓取', W / 2, 20, {
+          size: 16,
+          color: PLT.gold,
+          align: 'center',
+          valign: 'middle',
+          outline: 2,
+          outlineColor: PLT.redDeep,
+        });
+        const states = [
+          { x: 150, open: 0.05, label: 'clawOpen 0 · 闭合' },
+          { x: 320, open: 0.5, label: 'clawOpen 0.5 · 张爪' },
+          { x: 490, open: 1, label: 'clawOpen 1 · 全开' },
+        ];
+        for (const s of states) {
+          Art.claw(ctx, { x: s.x, y: 168, open: s.open, t, phase: 'aim' });
+          Txt.draw(ctx, s.label, s.x, 270, {
+            size: 10,
+            color: PLT.cream,
+            align: 'center',
+            valign: 'middle',
+            outline: 1,
+            outlineColor: PLT.ink,
+          });
+        }
+        // 抓取中
+        Art.claw(ctx, {
+          x: 320,
+          y: 210,
+          open: 0.12,
+          t,
+          phase: 'grab',
+          grab: { kind: 'gold', id: 'xg' },
+        });
+        Txt.draw(ctx, 'grab：夹住金福袋', 320, 300, {
+          size: 10,
+          color: PLT.goldLight,
+          align: 'center',
+          valign: 'middle',
+          outline: 1,
+          outlineColor: PLT.redDeep,
+        });
+      });
+
+      // 标题 + 奖卡 + 令牌 + 难度星
+      draws.set('g-card', (ctx, t) => {
+        Art.background(ctx, 'stage', t, { dim: 0.2 });
+        Art.title(ctx, t);
+        Art.winnerCard(ctx, {
+          number: '028',
+          prize: '戴森吹风机 ×1',
+          levelName: '第 3 关 · 好运连连',
+          t: t % 4,
+          accuracy: 0.92,
+        });
+        // 玩家令牌
+        const tokens = [
+          { number: '03', x: 90, won: false },
+          { number: '08', x: 170, won: true },
+          { number: '12', x: 250, dim: true },
+          { number: '20', x: 330, won: false, scale: 1.2 },
+        ];
+        for (const tk of tokens) {
+          Art.playerToken(ctx, Object.assign({ y: 314, scale: 1, t }, tk));
+        }
+        // 难度星标
+        const diffs = [1, 2, 3, 4];
+        for (let i = 0; i < diffs.length; i++) {
+          Art.levelBadge(ctx, { x: 400 + i * 56, y: 306, difficulty: diffs[i], scale: 1.2 });
+          Txt.draw(ctx, '难度 ' + diffs[i], 400 + i * 56 + 18, 334, {
+            size: 9,
+            color: PLT.greyLight,
+            align: 'center',
+            valign: 'middle',
+          });
+        }
+        Txt.draw(ctx, '奖卡 / 令牌(中心锚点) / 难度星标(左上角锚点)', W / 2, 350, {
+          size: 9,
+          color: PLT.greyLight,
+          align: 'center',
+          valign: 'middle',
+        });
+      });
+
+      // 终场：Art.finale + 屏幕侧名单面板的组合效果
+      draws.set('g-finale', (ctx, t) => {
+        Art.background(ctx, 'finale', t);
+        const summary = {
+          totalWinners: 7,
+          players: 12,
+          levels: [
+            { name: '第一关', prize: '暖心保温杯', winners: [3, 8, 15] },
+            { name: '第二关', prize: '无线蓝牙耳机', winners: [2, 11] },
+            { name: '第三关', prize: '智能手表', winners: [7] },
+            { name: '特等奖', prize: '神秘大奖', winners: [9] },
+          ],
+        };
+        Art.finale(ctx, t, summary);
+        // 模拟 FinaleScreen 自己绘制的名单面板（证明两图层不打架）
+        const px = 108;
+        const py = 152;
+        const pw = 424;
+        const ph = 148;
+        Art.panel(ctx, { x: px, y: py, w: pw, h: ph, variant: 'dark' });
+        Txt.draw(ctx, '本局中奖名单', px + 14, py + 10, { size: 12, color: PLT.gold });
+        const rowH = Math.min(26, (ph - 34) / summary.levels.length);
+        for (let i = 0; i < summary.levels.length; i++) {
+          const lv = summary.levels[i];
+          const y = py + 32 + i * rowH;
+          Txt.draw(ctx, Txt.fit(`${i + 1}. ${lv.name}`, 120, { size: 11 }), px + 14, y, {
+            size: 11,
+            color: PLT.cream,
+          });
+          Txt.draw(ctx, Txt.fit(lv.prize, 132, { size: 10 }), px + 138, y + 1, {
+            size: 10,
+            color: PLT.goldLight,
+          });
+          Txt.draw(
+            ctx,
+            Txt.fit(lv.winners.map((n) => `${n}号`).join('、'), 130, { size: 10 }),
+            px + pw - 14,
+            y + 1,
+            { size: 10, color: PLT.cream, align: 'right' }
+          );
+        }
+        Txt.draw(ctx, '共 7 位中奖 · 12 位玩家 · 4 关全数开完', 320, 306, {
+          size: 10,
+          color: PLT.greyLight,
+          align: 'center',
+        });
+      });
+
+      // UI 组件总览
+      draws.set('g-ui', (ctx, t) => {
+        Art.background(ctx, 'home', t, { dim: 0.45, snow: false, crowd: false });
+        Txt.draw(ctx, '面板 · 按钮 · 图标', W / 2, 16, {
+          size: 15,
+          color: PLT.gold,
+          align: 'center',
+          valign: 'middle',
+          outline: 2,
+          outlineColor: PLT.redDeep,
+        });
+
+        // 面板 4 变体
+        const variants = [
+          { v: 'dark', x: 32 },
+          { v: 'red', x: 192 },
+          { v: 'gold', x: 352 },
+          { v: 'plain', x: 512 },
+        ];
+        for (const item of variants) {
+          Art.panel(ctx, { x: item.x, y: 34, w: 120, h: 62, variant: item.v });
+          Txt.draw(ctx, item.v, item.x + 60, 65, {
+            size: 13,
+            color: item.v === 'gold' ? PLT.redDeep : PLT.cream,
+            align: 'center',
+            valign: 'middle',
+            outline: 1,
+            outlineColor: PLT.ink,
+          });
+        }
+
+        // 按钮状态
+        Art.button(ctx, { x: 32, y: 116, w: 150, h: 40, label: '开始抽奖', primary: true, hover: true, t });
+        Art.button(ctx, { x: 196, y: 116, w: 150, h: 40, label: '普通按钮', hover: true, t });
+        Art.button(ctx, { x: 360, y: 116, w: 150, h: 40, label: '已禁用', disabled: true, t });
+        Art.button(ctx, { x: 524, y: 116, w: 100, h: 40, label: '按下', pressed: true, t });
+        Txt.draw(ctx, 'primary+hover / hover / disabled / pressed', W / 2, 170, {
+          size: 9,
+          color: PLT.greyLight,
+          align: 'center',
+          valign: 'middle',
+        });
+
+        // 图标 8 个
+        const icons = ['gift', 'lantern', 'coin', 'star', 'sound', 'mute', 'back', 'trophy'];
+        for (let i = 0; i < icons.length; i++) {
+          const x = 60 + i * 72;
+          Art.icon(ctx, icons[i], x, 210, 2);
+          Txt.draw(ctx, icons[i], x, 236, {
+            size: 9,
+            color: PLT.greyLight,
+            align: 'center',
+            valign: 'middle',
+          });
+        }
+
+        // 难度星标
+        for (let d = 1; d <= 4; d++) {
+          Art.levelBadge(ctx, { x: 60 + (d - 1) * 100, y: 260, difficulty: d, scale: 1.3 });
+          Txt.draw(ctx, '难度 ' + d, 78 + (d - 1) * 100, 284, {
+            size: 9,
+            color: PLT.greyLight,
+            align: 'center',
+            valign: 'middle',
+          });
+        }
+
+        // 令牌
+        Art.playerToken(ctx, { number: '07', x: 60, y: 322, t });
+        Art.playerToken(ctx, { number: '18', x: 140, y: 322, won: true, t });
+        Art.playerToken(ctx, { number: '09', x: 220, y: 322, dim: true, t });
+        Art.playerToken(ctx, { number: '20', x: 300, y: 322, scale: 1.4, t });
+        Txt.draw(ctx, 'playerToken：默认 / 中奖 / 暗置 / 放大', W / 2, 350, {
+          size: 9,
+          color: PLT.greyLight,
+          align: 'center',
+          valign: 'middle',
+        });
+      });
+
+      // 粒子舞台
+      draws.set('g-fx', (ctx, t) => {
+        const shake = FX.getShake();
+        ctx.save();
+        ctx.translate(shake.x, shake.y);
+        Art.background(ctx, 'stage', t, { dim: 0.2 });
+        Art.machine(ctx, idleState(), t);
+        FX.drawBack(ctx);
+        ctx.restore();
+        FX.drawFront(ctx);
+      });
+
+      /* ---------------- 可视区域优化 ---------------- */
+
+      const visible = new Set(canvases.map((c) => c.id));
+      if (typeof IntersectionObserver !== 'undefined') {
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) visible.add(entry.target.id);
+              else visible.delete(entry.target.id);
+            }
+          },
+          { rootMargin: '120px 0px' }
+        );
+        for (const c of canvases) io.observe(c);
+      }
+
+      /* ---------------- 主循环 ---------------- */
+
+      const RENDER = {
+        begin(ctx) {
+          ctx.setTransform(1, 0, 0, 1, 0, 0);
+          ctx.globalAlpha = 1;
+          ctx.globalCompositeOperation = 'source-over';
+          ctx.imageSmoothingEnabled = false;
+          ctx.fillStyle = PLT.void;
+          ctx.fillRect(0, 0, W, H);
+        },
+      };
+
+      let last = performance.now();
+      let t = 0;
+      function frame(now) {
+        const dt = Math.min(0.05, Math.max(0, (now - last) / 1000));
+        last = now;
+        t += dt;
+        FX.update(dt);
+        for (const c of canvases) {
+          if (!visible.has(c.id)) continue;
+          const ctx = ctxOf.get(c.id);
+          const draw = draws.get(c.id);
+          if (!ctx || !draw) continue;
+          RENDER.begin(ctx);
+          draw(ctx, t, dt);
+        }
+        requestAnimationFrame(frame);
+      }
+
+      /* ---------------- 粒子按钮 ---------------- */
+
+      const buttons = document.getElementById('fx-buttons');
+      if (buttons) {
+        buttons.addEventListener('click', (e) => {
+          const btn = e.target && e.target.closest ? e.target.closest('button[data-fx]') : null;
+          if (!btn) return;
+          const kind = btn.dataset.fx;
+          if (kind === 'firework') {
+            FX.firework(110 + Math.random() * 420, 50 + Math.random() * 90);
+            FX.shake(2, 0.15);
+          } else if (kind === 'coin') {
+            FX.coinRain(2.5);
+          } else if (kind === 'confetti') {
+            FX.confetti(W / 2, 190, 70, { speed: 170, gravity: 220 });
+          } else if (kind === 'sparks') {
+            FX.sparks(W / 2, 200, 32, PLT.gold);
+          } else if (kind === 'ring') {
+            FX.ring(W / 2, 200, PLT.gold, 120, 0.7);
+            FX.ring(W / 2, 200, PLT.redLight, 80, 0.5);
+          } else if (kind === 'flash') {
+            FX.flash(PLT.cream, 0.35);
+          } else if (kind === 'shake') {
+            FX.shake(6, 0.5);
+          } else if (kind === 'clear') {
+            FX.clear();
+          }
+        });
+      }
+
+      // 首帧
+      requestAnimationFrame(frame);
+
+      // 首次进入粒子区时给一点演示
+      FX.firework(W / 2, 110, { color: PLT.gold, count: 34, scale: 1.1 });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,71 @@
+{
+  "name": "cny-fudai-lottery",
+  "version": "1.0.0",
+  "private": true,
+  "description": "新春福袋抓抓乐 - 年会像素风抽奖小游戏（Electron + Canvas）",
+  "author": "LiZhiYi7 (https://github.com/LiZhiYi7)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LiZhiYi7/cny-fudai-lottery.git"
+  },
+  "homepage": "https://github.com/LiZhiYi7/cny-fudai-lottery#readme",
+  "bugs": {
+    "url": "https://github.com/LiZhiYi7/cny-fudai-lottery/issues"
+  },
+  "keywords": [
+    "electron",
+    "pixel-art",
+    "lottery",
+    "canvas",
+    "chinese-new-year",
+    "game",
+    "windows"
+  ],
+  "type": "module",
+  "main": "electron/main.cjs",
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "start": "electron .",
+    "icon": "python scripts/gen-icon.py",
+    "test": "node --test \"tests/unit/*.test.mjs\"",
+    "test:e2e": "node tests/e2e/run.mjs",
+    "build:win": "node scripts/build.mjs",
+    "shot": "node scripts/shot.mjs"
+  },
+  "devDependencies": {
+    "electron": "43.3.0",
+    "electron-builder": "^26.0.12",
+    "playwright-core": "^1.49.1"
+  },
+  "build": {
+    "appId": "com.cny.fudai",
+    "productName": "新春福袋抓抓乐",
+    "asar": true,
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "electron/**/*",
+      "src/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/icon.ico"
+    },
+    "portable": {
+      "artifactName": "新春福袋抓抓乐-${version}-portable.exe",
+      "requestExecutionLevel": "user"
+    },
+    "compression": "normal"
+  }
+}

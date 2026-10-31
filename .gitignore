@@ -1,0 +1,12 @@
+node_modules/
+dist/
+data/
+preview/
+*.log
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+.env
+.env.*
+*.zip

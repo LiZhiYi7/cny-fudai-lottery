@@ -1,0 +1,419 @@
+/* 全局：像素游戏外壳、DOM 弹层、兑奖清单、打印 */
+
+@font-face {
+  font-family: "Fusion Pixel";
+  src: url("./assets/fonts/fusion-pixel-12px-zh_hans.woff2") format("woff2");
+  font-display: block;
+  font-weight: 400;
+  font-style: normal;
+}
+
+:root {
+  --gold: #ffd05a;
+  --gold-light: #ffefa8;
+  --gold-dark: #c88a24;
+  --red: #d72b3f;
+  --red-dark: #8e1424;
+  --red-deep: #560b17;
+  --ink: #140d18;
+  --ink2: #1d1322;
+  --night: #221736;
+  --plum: #3a2650;
+  --cream: #fff3d6;
+  --grey: #7a6b7f;
+  --grey-light: #bcabbe;
+  --font: "Microsoft YaHei UI", "Microsoft YaHei", "SimHei", "PingFang SC", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  background: #050308;
+  overflow: hidden;
+}
+
+body {
+  font-family: var(--font);
+  color: var(--cream);
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: default;
+}
+
+#app {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(ellipse at 50% 42%, rgba(58, 38, 80, 0.55), transparent 62%),
+    radial-gradient(ellipse at 50% 120%, rgba(215, 43, 63, 0.16), transparent 60%),
+    #050308;
+}
+
+#stage-frame {
+  position: relative;
+  flex: none;
+  width: 640px;
+  height: 360px;
+  box-shadow:
+    0 0 0 2px #2c1d44,
+    0 0 0 4px #0b0710,
+    0 18px 70px rgba(0, 0, 0, 0.75),
+    0 0 80px rgba(215, 43, 63, 0.12);
+}
+
+#stage {
+  display: block;
+  width: 640px;
+  height: 360px;
+  background: #07040a;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+/* ---------- DOM 叠层 ---------- */
+.ui-root {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+}
+
+.ui-root > * {
+  pointer-events: auto;
+}
+
+.admin-root {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: none;
+  background: rgba(5, 3, 8, 0.86);
+  backdrop-filter: blur(2px);
+}
+
+.admin-root.open {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---------- 像素按钮（DOM） ---------- */
+.px-btn {
+  appearance: none;
+  border: 2px solid var(--gold);
+  background: var(--red-dark);
+  color: var(--cream);
+  font-family: var(--font);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 9px 20px;
+  cursor: pointer;
+  box-shadow:
+    inset 0 0 0 2px var(--red-deep),
+    0 3px 0 #3c0710;
+  transition: transform 0.05s linear, background 0.1s linear;
+}
+.px-btn:hover {
+  background: var(--red);
+}
+.px-btn:active {
+  transform: translateY(2px);
+  box-shadow: inset 0 0 0 2px var(--red-deep);
+}
+.px-btn.secondary {
+  background: var(--ink2);
+  border-color: var(--plum);
+  box-shadow: inset 0 0 0 2px #0d0814, 0 3px 0 #0d0814;
+}
+.px-btn.secondary:hover {
+  background: var(--plum);
+}
+.px-btn.ghost {
+  background: transparent;
+  border-color: var(--plum);
+  box-shadow: none;
+}
+.px-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ---------- 弹窗 ---------- */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(5, 3, 8, 0.8);
+  padding: 18px;
+}
+
+.modal {
+  width: min(460px, 92vw);
+  background: var(--ink2);
+  border: 2px solid var(--gold);
+  box-shadow:
+    0 0 0 4px #07040a,
+    0 18px 50px rgba(0, 0, 0, 0.8),
+    inset 0 0 0 2px var(--ink);
+  padding: 22px 24px;
+}
+
+.modal h3 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  color: var(--gold);
+  letter-spacing: 2px;
+}
+
+.modal p {
+  margin: 0 0 16px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--grey-light);
+}
+
+.modal .field {
+  margin: 0 0 14px;
+}
+
+.modal label {
+  display: block;
+  font-size: 12px;
+  color: var(--grey-light);
+  margin-bottom: 6px;
+}
+
+.modal input[type="text"],
+.modal input[type="password"],
+.modal input[type="number"] {
+  width: 100%;
+  background: #0d0812;
+  border: 2px solid var(--plum);
+  color: var(--cream);
+  font-family: var(--font);
+  font-size: 16px;
+  padding: 9px 12px;
+  outline: none;
+  letter-spacing: 2px;
+}
+
+.modal input:focus {
+  border-color: var(--gold);
+}
+
+.modal .actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 18px;
+}
+
+.modal .error {
+  color: #ff7a8a;
+  font-size: 12px;
+  min-height: 18px;
+  margin-top: 6px;
+}
+
+.modal.shake {
+  animation: modal-shake 0.3s linear;
+}
+
+@keyframes modal-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-6px);
+  }
+  75% {
+    transform: translateX(6px);
+  }
+}
+
+/* ---------- 兑奖清单面板 ---------- */
+.sheet-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(5, 3, 8, 0.72);
+  padding: 20px;
+}
+
+.sheet {
+  width: min(980px, 96vw);
+  max-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--ink2);
+  border: 2px solid var(--gold);
+  box-shadow: 0 0 0 4px #07040a, 0 24px 60px rgba(0, 0, 0, 0.8);
+}
+
+.sheet-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+  border-bottom: 2px solid var(--plum);
+  background: linear-gradient(180deg, #2a1a2e, #1d1322);
+}
+
+.sheet-header h2 {
+  margin: 0;
+  font-size: 18px;
+  color: var(--gold);
+  letter-spacing: 3px;
+}
+
+.sheet-header .meta {
+  font-size: 12px;
+  color: var(--grey-light);
+  margin-left: auto;
+}
+
+.sheet-body {
+  overflow: auto;
+  padding: 14px 20px 4px;
+}
+
+.sheet-foot {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  padding: 14px 20px;
+  border-top: 2px solid var(--plum);
+}
+
+.sheet table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.sheet th,
+.sheet td {
+  padding: 8px 10px;
+  border-bottom: 1px solid #2d1f3a;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.sheet th {
+  color: var(--gold);
+  font-weight: 700;
+  position: sticky;
+  top: 0;
+  background: var(--ink2);
+  border-bottom: 2px solid var(--plum);
+}
+
+.sheet tr.level-row td {
+  background: #241733;
+  color: var(--cream);
+  font-weight: 700;
+}
+
+.sheet .num {
+  font-weight: 700;
+  color: var(--gold-light);
+  letter-spacing: 1px;
+}
+
+.sheet .paid {
+  color: var(--jade, #5ad6a3);
+}
+
+.sheet .unpaid {
+  color: #ffb36b;
+}
+
+.sheet input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--gold);
+  cursor: pointer;
+}
+
+.sheet .empty {
+  color: var(--grey);
+  padding: 30px;
+  text-align: center;
+}
+
+/* ---------- Toast ---------- */
+.toast-root {
+  position: fixed;
+  left: 50%;
+  bottom: 46px;
+  transform: translateX(-50%);
+  z-index: 80;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  pointer-events: none;
+}
+
+.toast {
+  background: var(--ink2);
+  border: 2px solid var(--gold);
+  color: var(--cream);
+  font-size: 13px;
+  padding: 8px 18px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+  animation: toast-in 0.18s ease-out;
+  max-width: 70vw;
+}
+
+.toast.error {
+  border-color: #ff5060;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- 打印 ---------- */
+.print-root {
+  display: none;
+}
+
+@media print {
+  html,
+  body {
+    background: #fff;
+    overflow: visible;
+  }
+  #app {
+    display: none !important;
+  }
+  .print-root {
+    display: block !important;
+  }
+}
